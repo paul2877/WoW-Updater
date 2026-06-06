@@ -1,0 +1,56 @@
+{
+    "data": [
+        {
+            "id": 2365667,
+            "gameId": 432,
+            "modId": 256782,
+            "isAvailable": true,
+            "displayName": "Quest For Sanctuary-1.0.zip",
+            "fileName": "Quest For Sanctuary-1.0.zip",
+            "releaseType": 1,
+            "fileStatus": 4,
+            "hashes": [
+                {
+                    "value": "f95230e776c0099db94a293b8ba73215719cf8c3",
+                    "algo": 1
+                },
+                {
+                    "value": "bf8f4cb464a44d89ff4f21b8fe5e15a4",
+                    "algo": 2
+                }
+            ],
+            "fileDate": "2017-01-08T08:11:33.387Z",
+            "fileLength": 1447935,
+            "downloadCount": 172,
+            "downloadUrl": "https://edge.forgecdn.net/files/2365/667/Quest%20For%20Sanctuary-1.0.zip",
+            "gameVersions": [
+                "1.10.2"
+            ],
+            "sortableGameVersions": [
+                {
+                    "gameVersionName": "1.10.2",
+                    "gameVersionPadded": "0000000001.0000000010.0000000002",
+                    "gameVersion": "1.10.2",
+                    "gameVersionReleaseDate": "2016-06-23T05:00:00Z",
+                    "gameVersionTypeId": 572
+                }
+            ],
+            "dependencies": [],
+            "alternateFileId": 0,
+            "isServerPack": false,
+            "fileFingerprint": 3862644327,
+            "modules": [
+                {
+                    "name": "manifest.json",
+                    "fingerprint": 2012736807
+                }
+            ]
+        }
+    ],
+    "pagination": {
+        "index": 0,
+        "pageSize": 50,
+        "resultCount": 1,
+        "totalCount": 1
+    }
+}

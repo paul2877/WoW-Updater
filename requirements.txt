@@ -1,0 +1,5 @@
+requests
+customtkinter
+selenium
+undetected-chromedriver
+beautifulsoup4

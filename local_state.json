@@ -1,0 +1,361 @@
+{
+    "271528": {
+        "file_id": "7288581",
+        "name": "HeroLib",
+        "folders": [
+            "HeroLib",
+            "HeroCache"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/105/0/256/256/636349934894474484.jpeg"
+    },
+    "103143": {
+        "file_id": "7288000",
+        "name": "HeroRotation",
+        "folders": [
+            "HeroRotation_Rogue",
+            "HeroRotation_Monk",
+            "HeroRotation_Hunter",
+            "HeroRotation_Warlock",
+            "HeroRotation",
+            "HeroRotation_Priest",
+            "HeroRotation_Mage",
+            "HeroRotation_DemonHunter",
+            "HeroRotation_Paladin",
+            "HeroRotation_Shaman",
+            "HeroRotation_Evoker",
+            "HeroRotation_Druid",
+            "HeroRotation_DeathKnight",
+            "HeroRotation_Warrior"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/92/111/256/256/636252834880106580.jpeg"
+    },
+    "6273": {
+        "file_id": "7759338",
+        "name": "BugSack",
+        "folders": [
+            "BugSack"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/762/256/256/636142192560849763.jpg"
+    },
+    "100610": {
+        "file_id": "7477558",
+        "name": "World Quest Tracker",
+        "folders": [
+            "WorldQuestTracker"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/181/564/256/256/636801439084871493.png"
+    },
+    "14154": {
+        "file_id": "7467433",
+        "name": "HandyNotes",
+        "folders": [
+            "HandyNotes"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/413/256/256/636142354843381360.jpg"
+    },
+    "785031": {
+        "file_id": "8022403",
+        "name": "HandyNotes: MythicPlus",
+        "folders": [
+            "HandyNotes_MythicPlus"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/728/934/256/256/638081919550288816.png"
+    },
+    "26120": {
+        "file_id": "7479932",
+        "name": "GatherMate2",
+        "folders": [
+            "GatherMate2",
+            "GatherMate2Storage_TheWarWithin",
+            "GatherMate2Storage_Dragonflight"
+        ],
+        "logoUrl": ""
+    },
+    "82697": {
+        "file_id": "7655893",
+        "name": "BigDebuffs",
+        "folders": [
+            "BigDebuffs"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/228/517/256/256/637050671967008386.png"
+    },
+    "94855": {
+        "file_id": "8201355",
+        "name": "Leatrix Plus",
+        "folders": [
+            "Leatrix_Plus"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/483/32/256/256/637782408501667202.png"
+    },
+    "912524": {
+        "file_id": "7614697",
+        "name": "HandyNotes: MapNotes",
+        "folders": [
+            "HandyNotes_MapNotes"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/959/256/256/638971820085047765.png"
+    },
+    "332558": {
+        "file_id": "6853357",
+        "name": "Better Vendor Price",
+        "folders": [
+            "BetterVendorPrice"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/216/108/256/256/637000734934041773.png"
+    },
+    "7950": {
+        "file_id": "8199303",
+        "name": "VuhDo",
+        "folders": [
+            "VuhDo",
+            "VuhDoOptions"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/961/191/256/256/638457236368130625.png"
+    },
+    "446096": {
+        "file_id": "7468692",
+        "name": "MinimapButtonButton",
+        "folders": [
+            "MinimapButtonButton"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/374/842/256/256/637549050606191177.png"
+    },
+    "17809": {
+        "file_id": "7458701",
+        "name": "BlizzMove",
+        "folders": [
+            "BlizzMove",
+            "BlizzMove_Debug"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/300/256/256/636142137694139375.jpg"
+    },
+    "13592": {
+        "file_id": "7398127",
+        "name": "Masque",
+        "folders": [
+            "Masque"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/809/624/256/256/638180657164269105.png"
+    },
+    "18808": {
+        "file_id": "7496310",
+        "name": "TomTom",
+        "folders": [
+            "TomTom"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/687/256/256/638971692093458734.png"
+    },
+    "13998": {
+        "file_id": "7752235",
+        "name": "SavedInstances",
+        "folders": [
+            "SavedInstances"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/389/256/256/636142346339816827.PNG"
+    },
+    "280369": {
+        "file_id": "7885186",
+        "name": "BtWQuests",
+        "folders": [
+            "BtWQuestsMidnightPrologue",
+            "BtWQuests",
+            "BtWQuestsTheWarWithin",
+            "BtWQuestsMidnight"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/157/522/256/256/636646180120743246.png"
+    },
+    "7473": {
+        "file_id": "7920438",
+        "name": "Prat 3.0",
+        "folders": [
+            "Prat-3.0"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/823/915/256/256/638208715390273976.png"
+    },
+    "934069": {
+        "file_id": "7689410",
+        "name": "HandyNotes: The War Within Treasures and Rares",
+        "folders": [
+            "HandyNotes_WarWithin"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1067/70/256/256/638601280405358646.png"
+    },
+    "13501": {
+        "file_id": "7488351",
+        "name": "Bartender4",
+        "folders": [
+            "Bartender4"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/64/267/256/256/636151513516385958.png"
+    },
+    "14155": {
+        "file_id": "7697964",
+        "name": "HandyNotes: Directions",
+        "folders": [
+            "HandyNotes_Directions"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1066/912/256/256/638601145430563039.png"
+    },
+    "15564": {
+        "file_id": "7480076",
+        "name": "Clique",
+        "folders": [
+            "Clique"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1045/651/256/256/638573529451998876.png"
+    },
+    "287692": {
+        "file_id": "7797577",
+        "name": "Simple Item Levels",
+        "folders": [
+            "SimpleItemLevel"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/142/24/256/256/636546082168775431.jpeg"
+    },
+    "2382": {
+        "file_id": "8198365",
+        "name": "BigWigs (Boss Timers & Tools)",
+        "folders": [
+            "BigWigs_TheDreamrift",
+            "BigWigs_MarchOnQuelDanas",
+            "BigWigs",
+            "BigWigs_Options",
+            "BigWigs_Sporefall",
+            "BigWigs_Core",
+            "BigWigs_TheVoidspire",
+            "BigWigs_Plugins",
+            "BigWigs_MidnightWorld"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/854/443/256/256/638258509870810560.jpeg"
+    },
+    "662863": {
+        "file_id": "7288774",
+        "name": "Dungeon Aura Tools",
+        "folders": [
+            "DungeonAuraTools"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1375/927/256/256/638892870045351473.png"
+    },
+    "288981": {
+        "file_id": "7349130",
+        "name": "Mythic Dungeon Tools - MDT",
+        "folders": [
+            "MythicDungeonTools"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1117/922/256/256/638673033178938820.png"
+    },
+    "20697": {
+        "file_id": "7492344",
+        "name": "GTFO",
+        "folders": [
+            "GTFO"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1807/708/256/256/639143702054586117.png"
+    },
+    "279257": {
+        "file_id": "8204593",
+        "name": "Raider.IO Mythic Plus, Raid Progress, and Recruitment",
+        "folders": [
+            "RaiderIO_DB_US_R",
+            "RaiderIO_DB_TW_M",
+            "RaiderIO_DB_KR_M",
+            "RaiderIO_DB_CN_M",
+            "RaiderIO_DB_EU_M",
+            "RaiderIO_DB_CN_F",
+            "RaiderIO_DB_US_F",
+            "RaiderIO",
+            "RaiderIO_DB_EU_F",
+            "RaiderIO_DB_TW_F",
+            "RaiderIO_DB_US_M",
+            "RaiderIO_DB_KR_F",
+            "RaiderIO_DB_TW_R",
+            "RaiderIO_DB_EU_R",
+            "RaiderIO_DB_KR_R",
+            "RaiderIO_DB_CN_R"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/497/793/256/256/637814777688250976.png"
+    },
+    "61284": {
+        "file_id": "8194099",
+        "name": "Details! Damage Meter",
+        "folders": [
+            "Details_TinyThreat",
+            "Details_Vanguard",
+            "Details_RaidCheck",
+            "Details_Compare2",
+            "Details",
+            "Details_DataStorage",
+            "Details_EncounterDetails",
+            "Details_Streamer"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/109/996/256/256/636383851490858804.png"
+    },
+    "2154": {
+        "file_id": "8200043",
+        "name": "Decursive",
+        "folders": [
+            "Decursive"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/280/256/256/636142135345575340.jpg"
+    },
+    "65387": {
+        "file_id": "8190284",
+        "name": "WeakAuras",
+        "folders": [
+            "WeakAurasTemplates",
+            "WeakAurasArchive",
+            "WeakAuras",
+            "WeakAurasOptions",
+            "WeakAurasModelPaths"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/782/256/256/636142194921799650.png"
+    },
+    "265199": {
+        "file_id": "7962927",
+        "name": "Astral Keys",
+        "folders": [
+            "AstralKeys"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/293/556/256/256/637329724120861294.png"
+    },
+    "26737": {
+        "file_id": "7810088",
+        "name": "GatherMate2_Data",
+        "folders": [
+            "GatherMate2_Data"
+        ],
+        "logoUrl": ""
+    },
+    "646134": {
+        "file_id": "8195908",
+        "name": "MoveAny (Edit Mode, Windows and Ui)",
+        "folders": [
+            "MoveAny"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1544/922/256/256/639002715774193161.png"
+    },
+    "705015": {
+        "file_id": "8072456",
+        "name": "CraftSim",
+        "folders": [
+            "CraftSim"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/918/162/256/256/638378888367067009.png"
+    },
+    "1175416": {
+        "file_id": "7503451",
+        "name": "Keystone Polaris (formerly Keystone Percentage Helper)",
+        "folders": [
+            "KeystonePolaris"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1469/828/256/256/638953879800096719.png"
+    },
+    "298530": {
+        "file_id": "7518666",
+        "name": "HandyNotes: WorldMapButton",
+        "folders": [
+            "HandyNotes_WorldMapButton"
+        ],
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/162/412/256/256/636676923227748058.jpeg"
+    }
+}

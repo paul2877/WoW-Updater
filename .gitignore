@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+*.spec
+state.json
+config.json
+icons/
+wow_updater_icons/
+.env
