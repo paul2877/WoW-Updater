@@ -81,7 +81,7 @@ def search_addons(query, api_key=None, log_callback=None):
     if not api_key:
         config = load_config()
         api_key = config.get("api_key", "")
-    url = f"{API_BASE}/mods/search?gameId=1&searchFilter={urllib.parse.quote(query)}"
+    url = f"{API_BASE}/mods/search?gameId=1&searchFilter={urllib.parse.quote(query)}&sortField=2&sortOrder=desc"
     data = api_request(url, api_key, log_callback=log_callback)
     if data and "data" in data:
         results = []
@@ -97,13 +97,29 @@ def search_addons(query, api_key=None, log_callback=None):
                 "name": item["name"],
                 "author": author,
                 "summary": item.get("summary", ""),
-                "logoUrl": logoUrl
+                "logoUrl": logoUrl,
+                "downloadCount": item.get("downloadCount", 0)
             })
+            
+        # Сначала точное совпадение по имени, затем сортировка по загрузкам
+        q_lower = query.lower().strip()
+        results.sort(key=lambda x: (
+            0 if x["name"].lower() == q_lower else (1 if q_lower in x["name"].lower() else 2),
+            -x["downloadCount"]
+        ))
+        
         return results, None
     return [], "Ничего не найдено или ошибка API."
 
 def get_latest_file(addon_id, api_key, target_version=None, log_callback=None):
-    url = f"{API_BASE}/mods/{addon_id}/files"
+    game_version_type_id = 517 # Retail (по умолчанию)
+    if target_version:
+        if "Cataclysm" in target_version:
+            game_version_type_id = 77522
+        elif "Classic Era" in target_version:
+            game_version_type_id = 67408
+            
+    url = f"{API_BASE}/mods/{addon_id}/files?gameVersionTypeId={game_version_type_id}"
     data = api_request(url, api_key, log_callback=log_callback)
     if not data or "data" not in data or not data["data"]:
         return None

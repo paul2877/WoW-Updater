@@ -190,6 +190,9 @@ class App(ctk.CTk):
 
         self.btn_update = ctk.CTkButton(frame_top, text="Обновить всё", fg_color="#F45821", hover_color="#FF7243", command=self.do_update_all)
         self.btn_update.pack(side="left", padx=(0, 10))
+
+        self.btn_reinstall_all = ctk.CTkButton(frame_top, text="Переустановить всё", fg_color="#C2185B", hover_color="#AD1457", command=self.do_reinstall_all)
+        self.btn_reinstall_all.pack(side="left", padx=(0, 10))
         
         self.btn_export = ctk.CTkButton(frame_top, text="Клонировать сборку", fg_color="#F57C00", hover_color="#E65100", command=self.do_import)
         self.btn_export.pack(side="left", padx=(0, 10))
@@ -410,8 +413,31 @@ class App(ctk.CTk):
         self.log("\n--- Запуск массового обновления ---")
         def process():
             self.after(0, lambda: self.btn_update.configure(state="disabled"))
+            if hasattr(self, 'btn_reinstall_all'): self.after(0, lambda: self.btn_reinstall_all.configure(state="disabled"))
             downloader.update_all(log_callback=self.log)
             self.after(0, lambda: self.btn_update.configure(state="normal"))
+            if hasattr(self, 'btn_reinstall_all'): self.after(0, lambda: self.btn_reinstall_all.configure(state="normal"))
+            self.after(0, self.refresh_installed_list)
+            
+        threading.Thread(target=process, daemon=True).start()
+
+    def do_reinstall_all(self):
+        self.log("\n--- Запуск полной переустановки всех аддонов ---")
+        def process():
+            self.after(0, lambda: self.btn_update.configure(state="disabled"))
+            if hasattr(self, 'btn_reinstall_all'): self.after(0, lambda: self.btn_reinstall_all.configure(state="disabled"))
+            
+            config = downloader.load_config()
+            addon_ids = config.get("addon_ids", [])
+            
+            for aid in addon_ids:
+                downloader.uninstall_addon(aid, log_callback=self.log)
+                downloader.install_addon(aid, log_callback=self.log)
+                import time
+                time.sleep(1)
+                
+            self.after(0, lambda: self.btn_update.configure(state="normal"))
+            if hasattr(self, 'btn_reinstall_all'): self.after(0, lambda: self.btn_reinstall_all.configure(state="normal"))
             self.after(0, self.refresh_installed_list)
             
         threading.Thread(target=process, daemon=True).start()
@@ -505,20 +531,37 @@ class App(ctk.CTk):
             lbl_id = ctk.CTkLabel(info_frame, text=f"ID: {a['id']}", font=ctk.CTkFont(size=11), text_color="gray", anchor="w")
             lbl_id.pack(fill="x")
 
-            btn_del = ctk.CTkButton(card, text="Удалить", width=90, height=32, corner_radius=15, fg_color="#D32F2F", hover_color="#B71C1C",
+            btn_del = ctk.CTkButton(card, text="Удалить", width=80, height=32, corner_radius=15, fg_color="#D32F2F", hover_color="#B71C1C",
                                     command=lambda aid=a["id"]: self.do_uninstall(aid))
-            btn_del.pack(side="right", padx=15, pady=10)
+            btn_del.pack(side="right", padx=10, pady=10)
+
+            is_managed = not (isinstance(a["id"], str) and not str(a["id"]).isdigit())
+            if is_managed:
+                btn_reinstall = ctk.CTkButton(card, text="Переустановить", width=100, height=32, corner_radius=15, fg_color="#F57C00", hover_color="#E65100",
+                                        command=lambda aid=a["id"]: self.do_reinstall(aid))
+                btn_reinstall.pack(side="right", padx=10, pady=10)
             
     def do_uninstall(self, addon_id, from_search=False):
         self.log(f"\n--- Удаление аддона ID: {addon_id} ---")
         def process():
-            if isinstance(addon_id, str) and not addon_id.isdigit():
+            if isinstance(addon_id, str) and not str(addon_id).isdigit():
                 downloader.uninstall_unmanaged_addon(addon_id, log_callback=self.log)
             else:
                 downloader.uninstall_addon(int(addon_id), log_callback=self.log)
             self.after(0, self.refresh_installed_list)
             if hasattr(self, 'last_search_results'):
                 self.after(0, lambda: self.display_search_results(self.last_search_results))
+        threading.Thread(target=process, daemon=True).start()
+
+    def do_reinstall(self, addon_id):
+        self.log(f"\n--- Переустановка аддона ID: {addon_id} ---")
+        def process():
+            if isinstance(addon_id, str) and not str(addon_id).isdigit():
+                self.log(f"Невозможно переустановить локальный аддон {addon_id}. Удалите его вручную.")
+            else:
+                downloader.uninstall_addon(int(addon_id), log_callback=self.log)
+                downloader.install_addon(int(addon_id), log_callback=self.log)
+            self.after(0, self.refresh_installed_list)
         threading.Thread(target=process, daemon=True).start()
 
 if __name__ == "__main__":
