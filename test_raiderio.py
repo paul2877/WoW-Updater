@@ -1,0 +1,14 @@
+import json
+from downloader import api_request, API_BASE, load_config
+
+config = load_config()
+api_key = config.get("api_key")
+
+# Raider.IO id is 279258
+url = f"{API_BASE}/mods/279258/files?pageSize=10"
+data = api_request(url, api_key)
+if data and "data" in data:
+    for f in data["data"]:
+        print(f"ID: {f['id']}, Name: {f['fileName']}, Type: {f.get('releaseType')}")
+        versions = [gv.get("gameVersionName") for gv in f.get("sortableGameVersions", [])]
+        print(f"  Versions: {versions[:5]}...")

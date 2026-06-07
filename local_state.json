@@ -1,361 +1,613 @@
 {
-    "271528": {
-        "file_id": "7288581",
-        "name": "HeroLib",
-        "folders": [
-            "HeroLib",
-            "HeroCache"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/105/0/256/256/636349934894474484.jpeg"
-    },
-    "103143": {
-        "file_id": "7288000",
-        "name": "HeroRotation",
-        "folders": [
-            "HeroRotation_Rogue",
-            "HeroRotation_Monk",
-            "HeroRotation_Hunter",
-            "HeroRotation_Warlock",
-            "HeroRotation",
-            "HeroRotation_Priest",
-            "HeroRotation_Mage",
-            "HeroRotation_DemonHunter",
-            "HeroRotation_Paladin",
-            "HeroRotation_Shaman",
-            "HeroRotation_Evoker",
-            "HeroRotation_Druid",
-            "HeroRotation_DeathKnight",
-            "HeroRotation_Warrior"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/92/111/256/256/636252834880106580.jpeg"
-    },
-    "6273": {
-        "file_id": "7759338",
-        "name": "BugSack",
-        "folders": [
-            "BugSack"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/762/256/256/636142192560849763.jpg"
-    },
-    "100610": {
-        "file_id": "7477558",
-        "name": "World Quest Tracker",
-        "folders": [
-            "WorldQuestTracker"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/181/564/256/256/636801439084871493.png"
-    },
-    "14154": {
-        "file_id": "7467433",
-        "name": "HandyNotes",
-        "folders": [
-            "HandyNotes"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/413/256/256/636142354843381360.jpg"
-    },
-    "785031": {
-        "file_id": "8022403",
-        "name": "HandyNotes: MythicPlus",
-        "folders": [
-            "HandyNotes_MythicPlus"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/728/934/256/256/638081919550288816.png"
-    },
-    "26120": {
-        "file_id": "7479932",
-        "name": "GatherMate2",
-        "folders": [
-            "GatherMate2",
-            "GatherMate2Storage_TheWarWithin",
-            "GatherMate2Storage_Dragonflight"
-        ],
-        "logoUrl": ""
-    },
-    "82697": {
-        "file_id": "7655893",
-        "name": "BigDebuffs",
-        "folders": [
-            "BigDebuffs"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/228/517/256/256/637050671967008386.png"
-    },
     "94855": {
-        "file_id": "8201355",
+        "file_id": null,
         "name": "Leatrix Plus",
-        "folders": [
-            "Leatrix_Plus"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/483/32/256/256/637782408501667202.png"
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/483/32/256/256/637782408501667202.png",
+        "folders": []
     },
     "912524": {
-        "file_id": "7614697",
+        "file_id": "8197038",
         "name": "HandyNotes: MapNotes",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/959/256/256/638971820085047765.png",
         "folders": [
             "HandyNotes_MapNotes"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/959/256/256/638971820085047765.png"
+        ]
     },
     "332558": {
         "file_id": "6853357",
         "name": "Better Vendor Price",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/216/108/256/256/637000734934041773.png",
         "folders": [
             "BetterVendorPrice"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/216/108/256/256/637000734934041773.png"
+        ]
     },
     "7950": {
-        "file_id": "8199303",
+        "file_id": "8189204",
         "name": "VuhDo",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/961/191/256/256/638457236368130625.png",
         "folders": [
             "VuhDo",
             "VuhDoOptions"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/961/191/256/256/638457236368130625.png"
+        ]
     },
     "446096": {
-        "file_id": "7468692",
+        "file_id": "6654327",
         "name": "MinimapButtonButton",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/374/842/256/256/637549050606191177.png",
         "folders": [
             "MinimapButtonButton"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/374/842/256/256/637549050606191177.png"
+        ]
     },
     "17809": {
-        "file_id": "7458701",
+        "file_id": "6490716",
         "name": "BlizzMove",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/300/256/256/636142137694139375.jpg",
         "folders": [
             "BlizzMove",
             "BlizzMove_Debug"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/300/256/256/636142137694139375.jpg"
+        ]
     },
     "13592": {
-        "file_id": "7398127",
+        "file_id": "8119699",
         "name": "Masque",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/809/624/256/256/638180657164269105.png",
         "folders": [
             "Masque"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/809/624/256/256/638180657164269105.png"
+        ]
+    },
+    "298530": {
+        "file_id": "6656005",
+        "name": "HandyNotes: WorldMapButton",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/162/412/256/256/636676923227748058.jpeg",
+        "folders": [
+            "HandyNotes_WorldMapButton"
+        ]
     },
     "18808": {
-        "file_id": "7496310",
+        "file_id": "6456628",
         "name": "TomTom",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/687/256/256/638971692093458734.png",
         "folders": [
             "TomTom"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1495/687/256/256/638971692093458734.png"
+        ]
     },
     "13998": {
-        "file_id": "7752235",
+        "file_id": "6662804",
         "name": "SavedInstances",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/389/256/256/636142346339816827.PNG",
         "folders": [
             "SavedInstances"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/389/256/256/636142346339816827.PNG"
+        ]
     },
     "280369": {
-        "file_id": "7885186",
+        "file_id": "6666907",
         "name": "BtWQuests",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/157/522/256/256/636646180120743246.png",
         "folders": [
-            "BtWQuestsMidnightPrologue",
             "BtWQuests",
-            "BtWQuestsTheWarWithin",
-            "BtWQuestsMidnight"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/157/522/256/256/636646180120743246.png"
+            "BtWQuestsTheWarWithin"
+        ]
     },
     "7473": {
-        "file_id": "7920438",
+        "file_id": "7968490",
         "name": "Prat 3.0",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/823/915/256/256/638208715390273976.png",
         "folders": [
             "Prat-3.0"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/823/915/256/256/638208715390273976.png"
+        ]
     },
     "934069": {
-        "file_id": "7689410",
+        "file_id": "7671131",
         "name": "HandyNotes: The War Within Treasures and Rares",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1067/70/256/256/638601280405358646.png",
         "folders": [
             "HandyNotes_WarWithin"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1067/70/256/256/638601280405358646.png"
+        ]
     },
     "13501": {
-        "file_id": "7488351",
+        "file_id": "6722891",
         "name": "Bartender4",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/64/267/256/256/636151513516385958.png",
         "folders": [
             "Bartender4"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/64/267/256/256/636151513516385958.png"
+        ]
+    },
+    "14154": {
+        "file_id": "6464029",
+        "name": "HandyNotes",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/413/256/256/636142354843381360.jpg",
+        "folders": [
+            "HandyNotes"
+        ]
     },
     "14155": {
-        "file_id": "7697964",
+        "file_id": "6472028",
         "name": "HandyNotes: Directions",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1066/912/256/256/638601145430563039.png",
         "folders": [
             "HandyNotes_Directions"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1066/912/256/256/638601145430563039.png"
+        ]
     },
     "15564": {
-        "file_id": "7480076",
+        "file_id": "8206196",
         "name": "Clique",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1045/651/256/256/638573529451998876.png",
         "folders": [
             "Clique"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1045/651/256/256/638573529451998876.png"
+        ]
     },
     "287692": {
-        "file_id": "7797577",
+        "file_id": "6479129",
         "name": "Simple Item Levels",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/142/24/256/256/636546082168775431.jpeg",
         "folders": [
             "SimpleItemLevel"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/142/24/256/256/636546082168775431.jpeg"
+        ]
     },
     "2382": {
-        "file_id": "8198365",
+        "file_id": "8205695",
         "name": "BigWigs (Boss Timers & Tools)",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/854/443/256/256/638258509870810560.jpeg",
         "folders": [
+            "BigWigs",
+            "BigWigs_Core",
+            "BigWigs_Options",
+            "BigWigs_Plugins",
+            "BigWigs_TheVoidspire",
             "BigWigs_TheDreamrift",
             "BigWigs_MarchOnQuelDanas",
-            "BigWigs",
-            "BigWigs_Options",
-            "BigWigs_Sporefall",
-            "BigWigs_Core",
-            "BigWigs_TheVoidspire",
-            "BigWigs_Plugins",
-            "BigWigs_MidnightWorld"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/854/443/256/256/638258509870810560.jpeg"
+            "BigWigs_MidnightWorld",
+            "BigWigs_Sporefall"
+        ]
     },
     "662863": {
-        "file_id": "7288774",
+        "file_id": "6604314",
         "name": "Dungeon Aura Tools",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1375/927/256/256/638892870045351473.png",
         "folders": [
             "DungeonAuraTools"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1375/927/256/256/638892870045351473.png"
+        ]
     },
     "288981": {
-        "file_id": "7349130",
+        "file_id": "8198438",
         "name": "Mythic Dungeon Tools - MDT",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1117/922/256/256/638673033178938820.png",
         "folders": [
             "MythicDungeonTools"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1117/922/256/256/638673033178938820.png"
+        ]
     },
     "20697": {
-        "file_id": "7492344",
+        "file_id": "6554302",
         "name": "GTFO",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1807/708/256/256/639143702054586117.png",
         "folders": [
             "GTFO"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1807/708/256/256/639143702054586117.png"
+        ]
     },
     "279257": {
-        "file_id": "8204593",
+        "file_id": "6850101",
         "name": "Raider.IO Mythic Plus, Raid Progress, and Recruitment",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/497/793/256/256/637814777688250976.png",
         "folders": [
-            "RaiderIO_DB_US_R",
-            "RaiderIO_DB_TW_M",
-            "RaiderIO_DB_KR_M",
-            "RaiderIO_DB_CN_M",
-            "RaiderIO_DB_EU_M",
-            "RaiderIO_DB_CN_F",
-            "RaiderIO_DB_US_F",
             "RaiderIO",
             "RaiderIO_DB_EU_F",
-            "RaiderIO_DB_TW_F",
-            "RaiderIO_DB_US_M",
-            "RaiderIO_DB_KR_F",
-            "RaiderIO_DB_TW_R",
+            "RaiderIO_DB_EU_M",
             "RaiderIO_DB_EU_R",
+            "RaiderIO_DB_KR_F",
+            "RaiderIO_DB_KR_M",
             "RaiderIO_DB_KR_R",
-            "RaiderIO_DB_CN_R"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/497/793/256/256/637814777688250976.png"
+            "RaiderIO_DB_TW_F",
+            "RaiderIO_DB_TW_M",
+            "RaiderIO_DB_TW_R",
+            "RaiderIO_DB_US_F",
+            "RaiderIO_DB_US_M",
+            "RaiderIO_DB_US_R"
+        ]
     },
     "61284": {
         "file_id": "8194099",
         "name": "Details! Damage Meter",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/109/996/256/256/636383851490858804.png",
         "folders": [
+            "Details",
+            "Details_EncounterDetails",
             "Details_TinyThreat",
             "Details_Vanguard",
-            "Details_RaidCheck",
-            "Details_Compare2",
-            "Details",
             "Details_DataStorage",
-            "Details_EncounterDetails",
-            "Details_Streamer"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/109/996/256/256/636383851490858804.png"
+            "Details_RaidCheck",
+            "Details_Streamer",
+            "Details_Compare2"
+        ]
     },
     "2154": {
-        "file_id": "8200043",
+        "file_id": "6510402",
         "name": "Decursive",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/280/256/256/636142135345575340.jpg",
         "folders": [
             "Decursive"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/280/256/256/636142135345575340.jpg"
+        ]
     },
     "65387": {
-        "file_id": "8190284",
+        "file_id": "7483857",
         "name": "WeakAuras",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/782/256/256/636142194921799650.png",
         "folders": [
-            "WeakAurasTemplates",
-            "WeakAurasArchive",
             "WeakAuras",
             "WeakAurasOptions",
-            "WeakAurasModelPaths"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/782/256/256/636142194921799650.png"
+            "WeakAurasModelPaths",
+            "WeakAurasTemplates",
+            "WeakAurasArchive"
+        ]
     },
     "265199": {
-        "file_id": "7962927",
+        "file_id": "6615934",
         "name": "Astral Keys",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/293/556/256/256/637329724120861294.png",
         "folders": [
             "AstralKeys"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/293/556/256/256/637329724120861294.png"
+        ]
     },
     "26737": {
-        "file_id": "7810088",
+        "file_id": "7810095",
         "name": "GatherMate2_Data",
+        "logoUrl": "",
         "folders": [
             "GatherMate2_Data"
-        ],
-        "logoUrl": ""
+        ]
     },
     "646134": {
-        "file_id": "8195908",
+        "file_id": "8210917",
         "name": "MoveAny (Edit Mode, Windows and Ui)",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1544/922/256/256/639002715774193161.png",
         "folders": [
             "MoveAny"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1544/922/256/256/639002715774193161.png"
+        ]
     },
     "705015": {
         "file_id": "8072456",
         "name": "CraftSim",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/918/162/256/256/638378888367067009.png",
         "folders": [
             "CraftSim"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/918/162/256/256/638378888367067009.png"
+        ]
     },
     "1175416": {
-        "file_id": "7503451",
+        "file_id": "6663691",
         "name": "Keystone Polaris (formerly Keystone Percentage Helper)",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1469/828/256/256/638953879800096719.png",
         "folders": [
-            "KeystonePolaris"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1469/828/256/256/638953879800096719.png"
+            "KeystonePercentageHelper"
+        ]
     },
-    "298530": {
-        "file_id": "7518666",
-        "name": "HandyNotes: WorldMapButton",
+    "103143": {
+        "file_id": "7288000",
+        "name": "HeroRotation",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/92/111/256/256/636252834880106580.jpeg",
         "folders": [
-            "HandyNotes_WorldMapButton"
-        ],
-        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/162/412/256/256/636676923227748058.jpeg"
+            "HeroRotation_Paladin",
+            "HeroRotation_Evoker",
+            "HeroRotation_Monk",
+            "HeroRotation_DemonHunter",
+            "HeroRotation_DeathKnight",
+            "HeroRotation_Hunter",
+            "HeroRotation_Warlock",
+            "HeroRotation",
+            "HeroRotation_Priest",
+            "HeroRotation_Warrior",
+            "HeroRotation_Druid",
+            "HeroRotation_Shaman",
+            "HeroRotation_Mage",
+            "HeroRotation_Rogue"
+        ]
+    },
+    "271528": {
+        "file_id": "6673879",
+        "name": "HeroLib",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/105/0/256/256/636349934894474484.jpeg",
+        "folders": [
+            "HeroCache",
+            "HeroLib"
+        ]
+    },
+    "6273": {
+        "file_id": "6902269",
+        "name": "BugSack",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/762/256/256/636142192560849763.jpg",
+        "folders": [
+            "BugSack"
+        ]
+    },
+    "100610": {
+        "file_id": "6625683",
+        "name": "World Quest Tracker",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/181/564/256/256/636801439084871493.png",
+        "folders": [
+            "WorldQuestTracker"
+        ]
+    },
+    "785031": {
+        "file_id": "8022403",
+        "name": "HandyNotes: MythicPlus",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/728/934/256/256/638081919550288816.png",
+        "folders": [
+            "HandyNotes_MythicPlus"
+        ]
+    },
+    "26120": {
+        "file_id": "7810099",
+        "name": "GatherMate2",
+        "logoUrl": "",
+        "folders": [
+            "GatherMate2",
+            "GatherMate2Storage_Dragonflight",
+            "GatherMate2Storage_TheWarWithin",
+            "GatherMate2Storage_Midnight"
+        ]
+    },
+    "82697": {
+        "file_id": "6729815",
+        "name": "BigDebuffs",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/228/517/256/256/637050671967008386.png",
+        "folders": [
+            "BigDebuffs"
+        ]
+    },
+    "13344": {
+        "file_id": "8106475",
+        "name": "BugGrabber",
+        "logoUrl": "",
+        "folders": [
+            "!BugGrabber"
+        ]
+    },
+    "306769": {
+        "file_id": "2994828",
+        "name": "Plaffs - !keys",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/177/952/256/256/636774870493879458.png",
+        "folders": [
+            "Plaffs_-_!keys"
+        ]
+    },
+    "925037": {
+        "file_id": "6457425",
+        "name": "AlterEgo",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/897/114/256/256/638342169353033264.png",
+        "folders": [
+            "AlterEgo"
+        ]
+    },
+    "102522": {
+        "file_id": "6556034",
+        "name": "Angry Keystones",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/982/256/256/636148966413496777.png",
+        "folders": [
+            "AngryKeystones"
+        ]
+    },
+    "6124": {
+        "file_id": "8190923",
+        "name": "Auctionator",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1403/232/256/256/638909541952729618.png",
+        "folders": [
+            "Auctionator"
+        ]
+    },
+    "398385": {
+        "file_id": "6719976",
+        "name": "TankHelper (RaidIcons, Automark, Pulltimer) Tank",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1459/838/256/256/638947482704550262.png",
+        "folders": [
+            "TankHelper"
+        ]
+    },
+    "1264217": {
+        "file_id": "8012132",
+        "name": "BagBrother",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1665/319/256/256/639060179333058055.png",
+        "folders": [
+            "BagBrother"
+        ]
+    },
+    "1592": {
+        "file_id": "6799236",
+        "name": "Bagnon",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/647/705/256/256/638048338012580367.png",
+        "folders": [
+            "BagBrother",
+            "Bagnon_Bank",
+            "Bagnon_Config",
+            "Bagnon_VoidStorage",
+            "Bagnon_GuildBank",
+            "Bagnon"
+        ]
+    },
+    "16816": {
+        "file_id": "899232",
+        "name": "HandyNotes_CityGuide",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/63/332/256/256/636142289812094147.png",
+        "folders": [
+            "HandyNotes_CityGuide"
+        ]
+    },
+    "306701": {
+        "file_id": "7778501",
+        "name": "DBM-Arnold Events Pack",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1622/344/256/256/639042906751976636.png",
+        "folders": [
+            "DBM-ArnoldEventsPack"
+        ]
+    },
+    "61621": {
+        "file_id": "6649090",
+        "name": "project-61621",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/199/651/256/256/636908480534088941.png",
+        "folders": [
+            "DBM-Challenges"
+        ]
+    },
+    "952046": {
+        "file_id": "7781376",
+        "name": "DBM Voicepack Russian Stepan",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/921/588/256/256/638386110263180685.jpeg",
+        "folders": [
+            "DBM-VPStepan"
+        ]
+    },
+    "1408427": {
+        "file_id": "7965776",
+        "name": "DeathTracer",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1636/380/256/256/639047696468491007.png",
+        "folders": [
+            "DeathTracer"
+        ]
+    },
+    "406141": {
+        "file_id": "5723734",
+        "name": "ElWigo",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/298/27/256/256/637347271886734935.png",
+        "folders": [
+            "elWigo"
+        ]
+    },
+    "28728": {
+        "file_id": "907071",
+        "name": "GearCheck",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/59/571/256/256/636141469257493494.png",
+        "folders": [
+            "GearCheck"
+        ]
+    },
+    "2743": {
+        "file_id": "8163040",
+        "name": "HealBot Continued",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/247/831/256/256/637165398596491715.jpeg",
+        "folders": [
+            "HealBot",
+            "HealBot_ExtraSkins",
+            "HealBot_Tips"
+        ]
+    },
+    "69254": {
+        "file_id": "6606207",
+        "name": "Hekili [The War Within]",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/58/94/256/256/636141430508143692.png",
+        "folders": [
+            "Hekili"
+        ]
+    },
+    "410191": {
+        "file_id": "6613760",
+        "name": "HeroDBC",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/302/614/256/256/637368291240895387.jpeg",
+        "folders": [
+            "HeroDBC"
+        ]
+    },
+    "958586": {
+        "file_id": "6466208",
+        "name": "I remember you [Retail / Classic / MoP Classic]",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/929/822/256/256/638402189630490401.png",
+        "folders": [
+            "IRememberYou"
+        ]
+    },
+    "1405411": {
+        "file_id": "7961461",
+        "name": "Lantern - QoL Core",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1563/536/256/256/639014312822252385.png",
+        "folders": [
+            "Lantern"
+        ]
+    },
+    "4383": {
+        "file_id": "8192036",
+        "name": "LittleWigs",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/854/444/256/256/638258510328494182.jpeg",
+        "folders": [
+            "LittleWigs",
+            "LittleWigs_Classic",
+            "LittleWigs_BurningCrusade",
+            "LittleWigs_WrathOfTheLichKing",
+            "LittleWigs_Cataclysm",
+            "LittleWigs_MistsOfPandaria",
+            "LittleWigs_WarlordsOfDraenor",
+            "LittleWigs_Legion",
+            "LittleWigs_BattleForAzeroth",
+            "LittleWigs_Shadowlands",
+            "LittleWigs_Dragonflight",
+            "LittleWigs_TheWarWithin"
+        ]
+    },
+    "2057": {
+        "file_id": "6470489",
+        "name": "OmniCC",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/137/516/256/256/636515481273843403.jpeg",
+        "folders": [
+            "OmniCC",
+            "OmniCC_Config"
+        ]
+    },
+    "14502": {
+        "file_id": "6455903",
+        "name": "Postal",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/62/440/256/256/636142158871422044.jpg",
+        "folders": [
+            "Postal"
+        ]
+    },
+    "988370": {
+        "file_id": "8197143",
+        "name": "Syndicator",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1402/63/256/256/638908766717324864.png",
+        "folders": [
+            "Syndicator"
+        ]
+    },
+    "624914": {
+        "file_id": "7683142",
+        "name": "TradeSkillFluxCapacitor",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/549/146/256/256/637885893736094507.jpeg",
+        "folders": [
+            "TradeSkillFluxCapacitor"
+        ]
+    },
+    "26191": {
+        "file_id": "7996312",
+        "name": "wMarker - Raid Controls / Marker Controls",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1124/203/256/256/638680920510802865.png",
+        "folders": [
+            "wMarker"
+        ]
+    },
+    "298827": {
+        "file_id": "6551113",
+        "name": "WorldBossTimers",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/162/787/256/256/636678740043210768.png",
+        "folders": [
+            "WorldBossTimers"
+        ]
+    },
+    "102243": {
+        "file_id": "7956408",
+        "name": "World Quest Tab",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/1553/530/256/256/639008159408636492.png",
+        "folders": [
+            "WorldQuestTab"
+        ]
+    },
+    "3358": {
+        "file_id": "8153043",
+        "name": "DBM - Deadly Boss Mods (DBM-Core)",
+        "logoUrl": "https://media.forgecdn.net/avatars/thumbnails/199/661/256/256/636908483866103322.png",
+        "folders": [
+            "DBM-Core",
+            "DBM-Brawlers",
+            "DBM-Midnight",
+            "DBM-Raids-Midnight",
+            "DBM-GUI",
+            "DBM-StatusBarTimers",
+            "DBM-VPVEM",
+            "DBM-Test"
+        ]
     }
 }

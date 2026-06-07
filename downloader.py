@@ -120,42 +120,78 @@ def get_latest_file(addon_id, api_key, target_version=None, log_callback=None):
         elif "Classic Era" in target_version:
             game_version_type_id = 67408
             
-    url = f"{API_BASE}/mods/{addon_id}/files?gameVersionTypeId={game_version_type_id}"
+    url = f"{API_BASE}/mods/{addon_id}/files?gameVersionTypeId={game_version_type_id}&pageSize=1000"
     data = api_request(url, api_key, log_callback=log_callback)
     if not data or "data" not in data or not data["data"]:
         return None
         
     files = data["data"]
     target_version = str(target_version).strip()
-    matching_files = []
     
+    # Строгая фильтрация файлов с "будущими" версиями по просьбе пользователя
     if target_version and target_version[0].isdigit():
         version_num = target_version.split(" ")[0]
-        matching_files = [f for f in files if any(version_num == gv.get('gameVersionName', '') for gv in f.get('sortableGameVersions', []))]
-        if not matching_files:
-            matching_files = [f for f in files if any(version_num in gv.get('gameVersionName', '') for gv in f.get('sortableGameVersions', []))]
-
-    if not matching_files:
-        target_type_id = 517 
-        if "Cataclysm" in target_version:
-            target_type_id = 73246
-        elif "Classic Era" in target_version:
-            target_type_id = 67408
+        def is_newer(v_test, v_target):
+            if not v_test or not v_target: return False
+            import re
+            def parse(v):
+                nums = re.findall(r'\d+', v)
+                return [int(x) for x in nums] if nums else [0,0,0]
+            try:
+                return parse(v_test) > parse(v_target)
+            except:
+                return False
+                
+        filtered_files = []
+        for f in files:
+            file_versions = [gv.get('gameVersionName', '') for gv in f.get('sortableGameVersions', [])]
+            if not any(is_newer(v, version_num) for v in file_versions):
+                filtered_files.append(f)
+                
+        files = filtered_files    
+    target_type_id = 517 
+    if "Cataclysm" in target_version:
+        target_type_id = 73246
+    elif "Classic Era" in target_version:
+        target_type_id = 67408
             
-    # Сначала ищем строгое совпадение по строке версии (например "11.0.5")
+    # Сначала ищем строгое совпадение по строке версии (например "11.0.5" или "11.1.7")
     exact_matches = []
     if target_version:
+        version_num = target_version.split(" ")[0] if target_version[0].isdigit() else target_version
         for f in files:
             for gv in f.get('sortableGameVersions', []):
-                if target_version in gv.get('gameVersionName', ''):
+                if version_num in gv.get('gameVersionName', ''):
                     exact_matches.append(f)
                     break
                     
     # Если строгих совпадений нет, ищем по target_type_id (со fallback логикой для Retail/Classic)
+    fallback_used = False
     matching_files = exact_matches
+    if not matching_files:
+        fallback_used = True
     if not matching_files:
         matching_files = [f for f in files if any(gv.get('gameVersionTypeId') == target_type_id for gv in f.get('sortableGameVersions', []))]
         
+        if target_version and target_type_id == 517:
+            if "War Within" in target_version:
+                major_version = "11."
+            else:
+                major_version = target_version.split('.')[0] + '.'
+            
+            if major_version == "11.":
+                matching_files = [f for f in matching_files if not any(gv.get('gameVersionName', '').startswith('12.') for gv in f.get('sortableGameVersions', []))]
+
+            filtered = []
+            for f in matching_files:
+                for gv in f.get('sortableGameVersions', []):
+                    name = gv.get('gameVersionName', '')
+                    if name.startswith(major_version):
+                        filtered.append(f)
+                        break
+            if filtered:
+                matching_files = filtered
+
         if not matching_files:
             for f in files:
                 for gv in f.get('sortableGameVersions', []):
@@ -186,10 +222,21 @@ def get_latest_file(addon_id, api_key, target_version=None, log_callback=None):
     if not best_file and matching_files:
         best_file = matching_files[0]
         
+    if best_file and fallback_used and log_callback and target_version:
+        found_versions = [gv.get('gameVersionName', '') for gv in best_file.get('sortableGameVersions', []) if gv.get('gameVersionName')]
+        def parse_ver(v):
+            import re
+            nums = re.findall(r'\d+', v)
+            return [int(x) for x in nums] if nums else [0,0,0]
+        found_versions.sort(key=parse_ver, reverse=True)
+        found_str = found_versions[0] if found_versions else "неизвестно"
+        if target_version.split(" ")[0] not in found_versions:
+            log_callback(f"⚠️ Точная версия {target_version} не найдена. Выбрана ближайшая старая: {found_str}")
+
     return best_file
 
 def get_addon_files(addon_id, api_key, log_callback=None):
-    url = f"{API_BASE}/mods/{addon_id}/files?pageSize=200"
+    url = f"{API_BASE}/mods/{addon_id}/files?pageSize=1000"
     data = api_request(url, api_key, log_callback=log_callback)
     if data and "data" in data:
         return data["data"]

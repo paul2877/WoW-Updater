@@ -463,18 +463,6 @@ class App(ctk.CTk):
                 def set_img(img, l=lbl_icon): l.configure(image=img, fg_color="transparent")
                 self.image_loader.get_image(res['logoUrl'], size=(50, 50), callback=lambda img, l=lbl_icon: self.after(0, lambda: set_img(img, l)))
             
-            info_frame = ctk.CTkFrame(card, fg_color="transparent")
-            info_frame.pack(side="left", fill="both", expand=True, padx=(0, 15), pady=10)
-
-            lbl_name = ctk.CTkLabel(info_frame, text=res['name'], font=ctk.CTkFont(size=16, weight="bold"), anchor="w")
-            lbl_name.pack(fill="x")
-            
-            lbl_author = ctk.CTkLabel(info_frame, text=f"Автор: {res['author']}", font=ctk.CTkFont(size=12), text_color="gray", anchor="w")
-            lbl_author.pack(fill="x")
-
-            lbl_summary = ctk.CTkLabel(info_frame, text=res.get('summary', ''), font=ctk.CTkFont(size=12), wraplength=450, justify="left", anchor="w")
-            lbl_summary.pack(fill="x", pady=(5, 0))
-
             if res['id'] in installed_ids:
                 btn_action = ctk.CTkButton(card, text="Удалить", width=110, height=35, corner_radius=15, fg_color="#D32F2F", hover_color="#B71C1C",
                                             command=lambda r=res: self.do_uninstall(r['id'], from_search=True))
@@ -486,6 +474,18 @@ class App(ctk.CTk):
             btn_versions = ctk.CTkButton(card, text="Версии", width=80, height=35, corner_radius=15, fg_color="#1E88E5", hover_color="#1565C0",
                                         command=lambda r=res: self.show_versions_window(r['id'], r['name']))
             btn_versions.pack(side="right", padx=(0, 10), pady=10)
+
+            info_frame = ctk.CTkFrame(card, fg_color="transparent")
+            info_frame.pack(side="left", fill="both", expand=True, padx=(0, 15), pady=10)
+
+            lbl_name = ctk.CTkLabel(info_frame, text=res['name'], font=ctk.CTkFont(size=16, weight="bold"), anchor="w")
+            lbl_name.pack(fill="x")
+            
+            lbl_author = ctk.CTkLabel(info_frame, text=f"Автор: {res['author']}", font=ctk.CTkFont(size=12), text_color="gray", anchor="w")
+            lbl_author.pack(fill="x")
+
+            lbl_summary = ctk.CTkLabel(info_frame, text=res.get('summary', ''), font=ctk.CTkFont(size=12), wraplength=450, justify="left", anchor="w")
+            lbl_summary.pack(fill="x", pady=(5, 0))
 
     def do_wago_search(self):
         query = self.entry_wago_search.get().strip()
@@ -777,6 +777,20 @@ class App(ctk.CTk):
                 def set_img(img, l=lbl_icon): l.configure(image=img, fg_color="transparent")
                 self.image_loader.get_image(a['logoUrl'], size=(40, 40), callback=lambda img, l=lbl_icon: self.after(0, lambda: set_img(img, l)))
 
+            btn_del = ctk.CTkButton(card, text="Удалить", width=80, height=32, corner_radius=15, fg_color="#D32F2F", hover_color="#B71C1C",
+                                    command=lambda aid=a["id"]: self.do_uninstall(aid))
+            btn_del.pack(side="right", padx=10, pady=10)
+
+            is_managed = not (isinstance(a["id"], str) and not str(a["id"]).isdigit())
+            if is_managed:
+                btn_reinstall = ctk.CTkButton(card, text="Переустановить", width=110, height=32, corner_radius=15, fg_color="#F57C00", hover_color="#E65100",
+                                        command=lambda aid=a["id"]: self.do_reinstall(aid))
+                btn_reinstall.pack(side="right", padx=10, pady=10)
+                
+                btn_versions = ctk.CTkButton(card, text="Версии", width=80, height=32, corner_radius=15, fg_color="#1E88E5", hover_color="#1565C0",
+                                        command=lambda aid=a["id"], n=a["name"]: self.show_versions_window(aid, n))
+                btn_versions.pack(side="right", padx=10, pady=10)
+
             info_frame = ctk.CTkFrame(card, fg_color="transparent")
             info_frame.pack(side="left", fill="both", expand=True, padx=(0, 15), pady=10)
 
@@ -792,20 +806,6 @@ class App(ctk.CTk):
             pb.pack_forget() # Скрываем по умолчанию
             if not hasattr(self, 'progress_bars'): self.progress_bars = {}
             self.progress_bars[str(a['id'])] = pb
-
-            btn_del = ctk.CTkButton(card, text="Удалить", width=80, height=32, corner_radius=15, fg_color="#D32F2F", hover_color="#B71C1C",
-                                    command=lambda aid=a["id"]: self.do_uninstall(aid))
-            btn_del.pack(side="right", padx=10, pady=10)
-
-            is_managed = not (isinstance(a["id"], str) and not str(a["id"]).isdigit())
-            if is_managed:
-                btn_reinstall = ctk.CTkButton(card, text="Переустановить", width=110, height=32, corner_radius=15, fg_color="#F57C00", hover_color="#E65100",
-                                        command=lambda aid=a["id"]: self.do_reinstall(aid))
-                btn_reinstall.pack(side="right", padx=10, pady=10)
-                
-                btn_versions = ctk.CTkButton(card, text="Версии", width=80, height=32, corner_radius=15, fg_color="#1E88E5", hover_color="#1565C0",
-                                        command=lambda aid=a["id"], n=a["name"]: self.show_versions_window(aid, n))
-                btn_versions.pack(side="right", padx=10, pady=10)
             
     def do_uninstall(self, aid):
         from tkinter import messagebox
@@ -907,20 +907,75 @@ class App(ctk.CTk):
     def show_versions_window(self, addon_id, mod_name):
         win = ctk.CTkToplevel(self)
         win.title(f"Версии: {mod_name}")
-        win.geometry("600x500")
+        win.geometry("600x600")
         win.transient(self)
         win.grab_set()
 
         lbl_title = ctk.CTkLabel(win, text=f"Доступные версии для {mod_name}", font=ctk.CTkFont(size=16, weight="bold"))
         lbl_title.pack(pady=(10, 5))
+        
+        search_frame = ctk.CTkFrame(win, fg_color="transparent")
+        search_frame.pack(fill="x", padx=10, pady=5)
+        
+        search_var = ctk.StringVar()
+        entry_search = ctk.CTkEntry(search_frame, placeholder_text="Поиск по версии (напр. 11.0.5)", textvariable=search_var)
+        entry_search.pack(side="left", fill="x", expand=True)
 
         lbl_status = ctk.CTkLabel(win, text="Загрузка...", text_color="gray")
         lbl_status.pack(pady=5)
 
         scroll = ctk.CTkScrollableFrame(win)
         scroll.pack(fill="both", expand=True, padx=10, pady=10)
+        
+        all_files = []
+
+        def populate_versions(*args):
+            for widget in scroll.winfo_children():
+                widget.destroy()
+                
+            query = search_var.get().strip().lower()
+            count = 0
+            for f in all_files:
+                if f.get('releaseType') == 3:
+                    continue
+                    
+                gvs = [gv.get("gameVersionName") for gv in f.get("sortableGameVersions", []) if gv.get("gameVersionName")]
+                gv_text = ", ".join(gvs[:3]) + ("..." if len(gvs) > 3 else "")
+                
+                search_text = (f.get('fileName', '') + " " + " ".join(gvs)).lower()
+                if query and query not in search_text:
+                    continue
+                    
+                if count >= 50:
+                    break
+                    
+                card = ctk.CTkFrame(scroll, fg_color="#25252B", corner_radius=10)
+                card.pack(fill="x", pady=5)
+                
+                info_frame = ctk.CTkFrame(card, fg_color="transparent")
+                info_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+                
+                lbl_name = ctk.CTkLabel(info_frame, text=f['fileName'], font=ctk.CTkFont(weight="bold"), anchor="w")
+                lbl_name.pack(fill="x")
+                
+                rtype = "Release" if f.get("releaseType") == 1 else "Beta" if f.get("releaseType") == 2 else "Alpha"
+                
+                lbl_desc = ctk.CTkLabel(info_frame, text=f"Тип: {rtype} | Патчи: {gv_text}", text_color="gray", anchor="w")
+                lbl_desc.pack(fill="x")
+                
+                def on_install(fid=f['id']):
+                    win.destroy()
+                    self.do_install_specific(addon_id, mod_name, fid)
+                    
+                btn = ctk.CTkButton(card, text="Установить", width=100, command=on_install)
+                btn.pack(side="right", padx=10, pady=10)
+                
+                count += 1
+
+        search_var.trace_add("write", populate_versions)
 
         def fetch_versions():
+            nonlocal all_files
             try:
                 config = downloader.load_config()
                 api_key = config.get("api_key", "")
@@ -933,35 +988,11 @@ class App(ctk.CTk):
                     self.after(0, lambda: lbl_status.configure(text="Версии не найдены", text_color="red"))
                     return
                 
-                self.after(0, lambda: populate_versions(files))
+                all_files = files
+                self.after(0, lambda: lbl_status.destroy())
+                self.after(0, populate_versions)
             except Exception as e:
                 self.after(0, lambda: lbl_status.configure(text=f"Ошибка: {e}", text_color="red"))
-
-        def populate_versions(files):
-            lbl_status.destroy()
-            for f in files:
-                card = ctk.CTkFrame(scroll, fg_color="#25252B", corner_radius=10)
-                card.pack(fill="x", pady=5)
-                
-                info_frame = ctk.CTkFrame(card, fg_color="transparent")
-                info_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
-                
-                lbl_name = ctk.CTkLabel(info_frame, text=f['fileName'], font=ctk.CTkFont(weight="bold"), anchor="w")
-                lbl_name.pack(fill="x")
-                
-                rtype = "Release" if f.get("releaseType") == 1 else "Beta" if f.get("releaseType") == 2 else "Alpha"
-                gvs = [gv.get("gameVersionName") for gv in f.get("sortableGameVersions", [])]
-                gv_text = ", ".join(gvs[:3]) + ("..." if len(gvs) > 3 else "")
-                
-                lbl_desc = ctk.CTkLabel(info_frame, text=f"Тип: {rtype} | Патчи: {gv_text}", text_color="gray", anchor="w")
-                lbl_desc.pack(fill="x")
-                
-                def on_install(fid=f['id']):
-                    win.destroy()
-                    self.do_install_specific(addon_id, mod_name, fid)
-                    
-                btn = ctk.CTkButton(card, text="Установить", width=100, command=on_install)
-                btn.pack(side="right", padx=10, pady=10)
 
         threading.Thread(target=fetch_versions, daemon=True).start()
 

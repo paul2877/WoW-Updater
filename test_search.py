@@ -1,17 +1,16 @@
-import urllib.request
 import json
+from downloader import api_request, API_BASE, load_config
 
-url = "https://www.curseforge.com/api/v1/mods/search?gameId=1&classId=6&searchFilter=hero&sortField=2&pageSize=50"
-req = urllib.request.Request(url, headers={
-    "Accept": "application/json",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-})
+config = load_config()
+api_key = config.get("api_key")
 
-try:
-    with urllib.request.urlopen(req) as response:
-        data = json.loads(response.read().decode())
-        print("Success! Items:", len(data.get("data", [])))
-except Exception as e:
-    print("Exception:", e)
-    if hasattr(e, 'read'):
-        print("Body:", e.read().decode())
+url = f"{API_BASE}/mods/search?gameId=1&slug=weakauras-2&pageSize=1"
+data = api_request(url, api_key)
+if data and "data" in data and len(data["data"]) > 0:
+    mod = data["data"][0]
+    print(f"ID: {mod['id']} | Name: {mod['name']}")
+    url2 = f"{API_BASE}/mods/{mod['id']}/files?pageSize=10"
+    data2 = api_request(url2, api_key)
+    if data2 and "data" in data2:
+        for f in data2["data"]:
+            print(f"  File: {f['fileName']} | Versions: {f.get('gameVersions')}")
