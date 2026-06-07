@@ -98,7 +98,8 @@ def search_addons(query, api_key=None, log_callback=None):
                 "author": author,
                 "summary": item.get("summary", ""),
                 "logoUrl": logoUrl,
-                "downloadCount": item.get("downloadCount", 0)
+                "downloadCount": item.get("downloadCount", 0),
+                "slug": item.get("slug", "")
             })
             
         # Сначала точное совпадение по имени, затем сортировка по загрузкам
@@ -126,50 +127,61 @@ def get_latest_file(addon_id, api_key, target_version=None, log_callback=None):
         
     files = data["data"]
     target_version = str(target_version).strip()
+    matching_files = []
     
-    # Если юзер ввел конкретный патч цифрами (например "11.0.5 (The War Within)" или "11.1.0")
     if target_version and target_version[0].isdigit():
         version_num = target_version.split(" ")[0]
-        for f in files:
-            for gv in f.get('sortableGameVersions', []):
-                if version_num == gv.get('gameVersionName', ''):
-                    return f
-        # Если точное совпадение не найдено, ищем частичное
-        for f in files:
-            for gv in f.get('sortableGameVersions', []):
-                if version_num in gv.get('gameVersionName', ''):
-                    return f
+        matching_files = [f for f in files if any(version_num == gv.get('gameVersionName', '') for gv in f.get('sortableGameVersions', []))]
+        if not matching_files:
+            matching_files = [f for f in files if any(version_num in gv.get('gameVersionName', '') for gv in f.get('sortableGameVersions', []))]
 
-    # Идентификаторы версий игр на CurseForge
-    # 517 = Retail
-    # 73246 = Cataclysm Classic
-    # 67408 = Classic Era
-    
-    target_type_id = 517 
-    if "Cataclysm" in target_version:
-        target_type_id = 73246
-    elif "Classic Era" in target_version:
-        target_type_id = 67408
+    if not matching_files:
+        target_type_id = 517 
+        if "Cataclysm" in target_version:
+            target_type_id = 73246
+        elif "Classic Era" in target_version:
+            target_type_id = 67408
+            
+        matching_files = [f for f in files if any(gv.get('gameVersionTypeId') == target_type_id for gv in f.get('sortableGameVersions', []))]
+        
+        if not matching_files:
+            for f in files:
+                for gv in f.get('sortableGameVersions', []):
+                    name = gv.get('gameVersionName', '')
+                    if target_type_id == 517 and ('11.' in name or '12.' in name):
+                        matching_files.append(f)
+                        break
+                    if target_type_id == 73246 and ('4.4' in name or 'Cataclysm' in name):
+                        matching_files.append(f)
+                        break
+                    if target_type_id == 67408 and ('1.15' in name or 'Classic' in name):
+                        matching_files.append(f)
+                        break
 
-    # Сначала пытаемся найти точное совпадение по type_id
-    for f in files:
-        for gv in f.get('sortableGameVersions', []):
-            if gv.get('gameVersionTypeId') == target_type_id:
-                return f
-                
-    # Fallback (ищем по строковому названию в имени версии, если type_id не подошел)
-    for f in files:
-        for gv in f.get('sortableGameVersions', []):
-            name = gv.get('gameVersionName', '')
-            if target_type_id == 517 and ('11.' in name or '12.' in name):
-                return f
-            if target_type_id == 73246 and ('4.4' in name or 'Cataclysm' in name):
-                return f
-            if target_type_id == 67408 and ('1.15' in name or 'Classic' in name):
-                return f
-                
-    # Если вообще ничего не нашли, возвращаем самый последний файл
-    return files[0]
+    if not matching_files:
+        matching_files = files
+
+    # Из подходящих выбираем релиз (1), если нет — бету (2), если нет — альфу (3)
+    best_file = None
+    for release_type in [1, 2, 3]:
+        for f in matching_files:
+            if f.get('releaseType') == release_type:
+                best_file = f
+                break
+        if best_file:
+            break
+
+    if not best_file and matching_files:
+        best_file = matching_files[0]
+        
+    return best_file
+
+def get_addon_files(addon_id, api_key, log_callback=None):
+    url = f"{API_BASE}/mods/{addon_id}/files?pageSize=200"
+    data = api_request(url, api_key, log_callback=log_callback)
+    if data and "data" in data:
+        return data["data"]
+    return []
 
 def get_download_url(addon_id, file_id, api_key, log_callback=None):
     url = f"{API_BASE}/mods/{addon_id}/files/{file_id}/download-url"
@@ -212,13 +224,22 @@ def get_numeric_id_from_slug(slug):
         
     return None
 
-def download_and_extract(url, target_dir):
+def download_and_extract(url, target_dir, progress_callback=None):
     with global_extract_lock:
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=30) as response:
+                total_size = int(response.getheader('Content-Length', 0))
+                downloaded = 0
                 with tempfile.NamedTemporaryFile(delete=False, suffix=".zip") as tmp:
-                    shutil.copyfileobj(response, tmp)
+                    while True:
+                        chunk = response.read(8192)
+                        if not chunk:
+                            break
+                        tmp.write(chunk)
+                        downloaded += len(chunk)
+                        if progress_callback and total_size > 0:
+                            progress_callback(downloaded, total_size)
                     tmp_path = tmp.name
                     
             extracted_folders = []
@@ -235,11 +256,11 @@ def download_and_extract(url, target_dir):
         except Exception as e:
             return False, []
 
-def install_addon(addon_id, log_callback=None, installed_list=None, override_path=None):
+def install_addon(addon_id, log_callback=None, installed_list=None, override_path=None, progress_callback=None, force_reinstall=False, target_file_id=None):
     with get_addon_lock(addon_id):
-        return _install_addon_locked(addon_id, log_callback, installed_list, override_path)
+        return _install_addon_locked(addon_id, log_callback, installed_list, override_path, progress_callback, force_reinstall, target_file_id)
 
-def _install_addon_locked(addon_id, log_callback=None, installed_list=None, override_path=None):
+def _install_addon_locked(addon_id, log_callback=None, installed_list=None, override_path=None, progress_callback=None, force_reinstall=False, target_file_id=None):
     if installed_list is None:
         installed_list = []
     
@@ -254,7 +275,7 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
             return False
         addon_id = numeric_id
         
-    if addon_id in installed_list:
+    if addon_id in installed_list and not force_reinstall:
         return True # Уже обработан в этой сессии
 
     installed_list.append(addon_id)
@@ -305,10 +326,19 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
 
     if log_callback: log_callback(f"Проверка {mod_name} (ID: {addon_id})...")
     
-    target_version = config.get("game_version", "Retail (The War Within)")
-    latest_file = get_latest_file(addon_id, api_key, target_version=target_version, log_callback=log_callback)
+    if target_file_id:
+        url = f"{API_BASE}/mods/{addon_id}/files/{target_file_id}"
+        data = api_request(url, api_key, log_callback=log_callback)
+        if not data or "data" not in data:
+            if log_callback: log_callback(f"[-] Не удалось получить файл с ID {target_file_id}.")
+            return False
+        latest_file = data["data"]
+    else:
+        target_version = config.get("game_version", "Retail (The War Within)")
+        latest_file = get_latest_file(addon_id, api_key, target_version=target_version, log_callback=log_callback)
+    
     if not latest_file:
-        if log_callback: log_callback(f"[-] Нет файлов для версии {target_version} ({mod_name}).")
+        if log_callback: log_callback(f"[-] Нет файлов для скачивания ({mod_name}).")
         return False
         
     file_id = str(latest_file["id"])
@@ -327,7 +357,7 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
     required_deps = [d["modId"] for d in deps if d.get("relationType") == 3 and "modId" in d]
     for dep_id in required_deps:
         if log_callback: log_callback(f"Найдена зависимость ID: {dep_id} для {mod_name}. Устанавливаем...")
-        install_addon(dep_id, log_callback, installed_list, override_path)
+        install_addon(dep_id, log_callback, installed_list, override_path, progress_callback, force_reinstall)
         
     state = load_state()
     addon_id_str = str(addon_id)
@@ -357,11 +387,22 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
     else:
         folders_exist = False
         
-    if current_file_id == file_id and not override_path and folders_exist:
+    if current_file_id == file_id and not override_path and folders_exist and not force_reinstall:
         if log_callback: log_callback(f"[OK] {mod_name} уже актуален ({file_name}).")
     else:
         if log_callback: log_callback(f"Скачивание {mod_name} ({file_name})...")
-        success, extracted_folders = download_and_extract(download_url, addons_path)
+        
+        # Очистка старых папок перед переустановкой/обновлением
+        if state.get(addon_id_str) and state[addon_id_str].get("folders"):
+            for folder_name in state[addon_id_str]["folders"]:
+                folder_path = os.path.join(addons_path, folder_name)
+                if os.path.exists(folder_path):
+                    try:
+                        shutil.rmtree(folder_path)
+                    except Exception as e:
+                        if log_callback: log_callback(f"[-] Не удалось удалить старую папку {folder_name}: {e}")
+        
+        success, extracted_folders = download_and_extract(download_url, addons_path, progress_callback=progress_callback)
         if success:
             state[addon_id_str] = {
                 "file_id": file_id,
@@ -382,9 +423,9 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
 
     return True
 
-def update_all(log_callback=None):
+def update_all(log_callback=None, progress_callback_factory=None):
     if log_callback: log_callback("Сканирование папки перед обновлением...")
-    added = scan_local_addons(log_callback=log_callback)
+    added, _ = scan_local_addons(log_callback=log_callback)
     if added > 0 and log_callback:
         log_callback(f"Добавлено новых аддонов: {added}")
         
@@ -396,7 +437,8 @@ def update_all(log_callback=None):
         
     for aid in addon_ids:
         try:
-            install_addon(aid, log_callback=log_callback)
+            cb = progress_callback_factory(aid) if progress_callback_factory else None
+            install_addon(aid, log_callback=log_callback, progress_callback=cb)
             time.sleep(1)
         except Exception as e:
             if log_callback: log_callback(f"[-] Внутренняя ошибка при обновлении: {e}")
@@ -608,7 +650,7 @@ def export_addon_list(filepath, log_callback=None):
         if log_callback: log_callback(f"Список успешно сохранен в {filepath}")
         return True
     except Exception as e:
-        if log_callback: log_callback(f"Ошибка сохранения списка: {e}")
+        if log_callback: log_callback(f"Ошибка при импорте списка: {e}")
         return False
 
 def import_addon_list(filepath, log_callback=None):
@@ -653,3 +695,180 @@ def import_addon_list(filepath, log_callback=None):
         
     if log_callback: log_callback("Все аддоны из списка успешно установлены!")
     return True
+
+def scan_local_addons(log_callback=None):
+    config = load_config()
+    api_key = config.get("api_key")
+    addons_path = config.get("addons_path", "")
+    
+    if not addons_path or not os.path.exists(addons_path):
+        if log_callback: log_callback("[-] Папка AddOns не найдена.")
+        return 0, 0
+        
+    state = load_state()
+    addon_ids = config.get("addon_ids", [])
+    
+    managed_folders = set()
+    for aid in addon_ids:
+        info = state.get(str(aid), {})
+        if isinstance(info, dict):
+            managed_folders.update(info.get("folders", []))
+            
+    found_unmanaged = []
+    
+    for folder_name in os.listdir(addons_path):
+        folder_path = os.path.join(addons_path, folder_name)
+        if not os.path.isdir(folder_path): continue
+        if folder_name in managed_folders: continue
+        if folder_name.startswith("Blizzard_"): continue
+        
+        toc_path = os.path.join(folder_path, f"{folder_name}.toc")
+        if not os.path.exists(toc_path):
+            toc_files = [f for f in os.listdir(folder_path) if f.endswith(".toc")]
+            if toc_files:
+                toc_path = os.path.join(folder_path, toc_files[0])
+            else:
+                continue
+                
+        try:
+            with open(toc_path, "r", encoding="utf-8", errors="ignore") as f:
+                content = f.read()
+        except:
+            continue
+            
+        import re
+        match = re.search(r"## X-Curse-Project-ID:\s*(\d+)", content)
+        if match:
+            project_id = int(match.group(1))
+            if project_id not in addon_ids:
+                found_unmanaged.append({"folder": folder_name, "id": project_id})
+                continue
+                
+        title_match = re.search(r"## Title.*?:\s*(.+)", content)
+        title = title_match.group(1).strip() if title_match else folder_name
+        title = re.sub(r"\|c[0-9a-fA-F]{8}", "", title)
+        title = title.replace("|r", "")
+        
+        found_unmanaged.append({"folder": folder_name, "title": title})
+        
+    if not found_unmanaged:
+        if log_callback: log_callback("[i] Все локальные аддоны уже добавлены или это системные аддоны Blizzard.")
+        return 0, 0
+        
+    if log_callback: log_callback(f"[*] Найдено {len(found_unmanaged)} неуправляемых локальных папок. Распознавание...")
+    
+    recognized_count = 0
+    for item in found_unmanaged:
+        if "id" in item:
+            aid = item["id"]
+            if aid not in addon_ids:
+                url = f"{API_BASE}/mods/{aid}"
+                data = api_request(url, api_key)
+                if data and "data" in data:
+                    mod_name = data["data"]["name"]
+                    addon_ids.append(aid)
+                    state[str(aid)] = {"name": mod_name, "folders": [item["folder"]]}
+                    recognized_count += 1
+                    if log_callback: log_callback(f"[+] Распознан по ID: {mod_name} (ID: {aid})")
+        else:
+            title = item["title"]
+            results, _ = search_addons(title, api_key)
+            if results:
+                matched = False
+                for res in results:
+                    if res["name"].lower() == title.lower() or res["slug"].lower() == item["folder"].lower():
+                        aid = res["id"]
+                        if aid not in addon_ids:
+                            addon_ids.append(aid)
+                            state[str(aid)] = {"name": res["name"], "folders": [item["folder"]]}
+                            recognized_count += 1
+                            if log_callback: log_callback(f"[+] Распознан по имени: {res['name']} (ID: {aid})")
+                        matched = True
+                        break
+                if not matched:
+                    res = results[0]
+                    if title.lower() in res["name"].lower():
+                        aid = res["id"]
+                        if aid not in addon_ids:
+                            addon_ids.append(aid)
+                            state[str(aid)] = {"name": res["name"], "folders": [item["folder"]]}
+                            recognized_count += 1
+                            if log_callback: log_callback(f"[+] Распознан примерно: {res['name']} (ID: {aid})")
+            else:
+                if log_callback: log_callback(f"[-] Не удалось найти аддон '{title}' на CurseForge.")
+                
+    config["addon_ids"] = addon_ids
+    save_config(config)
+    save_state(state)
+    
+    return len(found_unmanaged), recognized_count
+
+
+
+def backup_wtf(target_zip_path, log_callback=None):
+    config = load_config()
+    addons_path = get_wow_addons_path()
+    if not addons_path:
+        if log_callback: log_callback("[-] Путь к игре не настроен.")
+        return False
+        
+    wtf_path = os.path.join(os.path.dirname(os.path.dirname(addons_path)), "WTF")
+    if not os.path.exists(wtf_path):
+        if log_callback: log_callback("[-] Папка WTF не найдена.")
+        return False
+        
+    try:
+        import zipfile
+        if log_callback: log_callback(f"[*] Создание резервной копии WTF...")
+        with zipfile.ZipFile(target_zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            for root, dirs, files in os.walk(wtf_path):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, os.path.dirname(wtf_path))
+                    zipf.write(file_path, arcname)
+        if log_callback: log_callback(f"[+] Бэкап успешно сохранен в {target_zip_path}")
+        return True
+    except Exception as e:
+        if log_callback: log_callback(f"[-] Ошибка при создании бэкапа: {e}")
+        return False
+
+
+
+def switch_profile(new_profile_name, log_callback=None, progress_callback_factory=None):
+    config = load_config()
+    current_profile = config.get("current_profile", "Default")
+    profiles = config.get("profiles", {"Default": config.get("addon_ids", [])})
+    
+    # Сохраняем текущий
+    profiles[current_profile] = config.get("addon_ids", [])
+    
+    if new_profile_name not in profiles:
+        profiles[new_profile_name] = []
+        
+    old_ids = set(profiles[current_profile])
+    new_ids = set(profiles[new_profile_name])
+    
+    to_remove = old_ids - new_ids
+    to_install = new_ids - old_ids
+    
+    if log_callback: log_callback(f"\n--- Переключение на профиль: {new_profile_name} ---")
+    
+    for aid in to_remove:
+        uninstall_addon(aid, log_callback=log_callback)
+        
+    for aid in to_install:
+        cb = progress_callback_factory(aid) if progress_callback_factory else None
+        install_addon(aid, log_callback=log_callback, progress_callback=cb)
+        
+    config["current_profile"] = new_profile_name
+    config["profiles"] = profiles
+    config["addon_ids"] = list(new_ids)
+    save_config(config)
+    
+    if log_callback: log_callback(f"[*] Профиль успешно переключен на {new_profile_name}")
+
+def get_profiles():
+    config = load_config()
+    profiles = config.get("profiles", {"Default": config.get("addon_ids", [])})
+    current = config.get("current_profile", "Default")
+    return list(profiles.keys()), current
