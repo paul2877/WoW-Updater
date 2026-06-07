@@ -142,6 +142,18 @@ def get_latest_file(addon_id, api_key, target_version=None, log_callback=None):
         elif "Classic Era" in target_version:
             target_type_id = 67408
             
+    # Сначала ищем строгое совпадение по строке версии (например "11.0.5")
+    exact_matches = []
+    if target_version:
+        for f in files:
+            for gv in f.get('sortableGameVersions', []):
+                if target_version in gv.get('gameVersionName', ''):
+                    exact_matches.append(f)
+                    break
+                    
+    # Если строгих совпадений нет, ищем по target_type_id (со fallback логикой для Retail/Classic)
+    matching_files = exact_matches
+    if not matching_files:
         matching_files = [f for f in files if any(gv.get('gameVersionTypeId') == target_type_id for gv in f.get('sortableGameVersions', []))]
         
         if not matching_files:
