@@ -319,7 +319,19 @@ def _install_addon_locked(addon_id, log_callback=None, installed_list=None, over
         download_url = get_download_url(addon_id, file_id, api_key, log_callback=log_callback)
         
     if not download_url:
-        if log_callback: log_callback(f"[-] CurseForge заблокировал скачивание {mod_name} (требует офф. клиент).")
+        if log_callback: log_callback(f"[!] API не отдал ссылку для {mod_name}. Пробуем собрать её вручную...")
+        # Реконструируем URL для edge.forgecdn.net
+        if len(file_id) >= 7:
+            part1 = file_id[:4]
+            part2 = file_id[4:]
+            download_url = f"https://edge.forgecdn.net/files/{part1}/{part2}/{urllib.parse.quote(file_name)}"
+        elif len(file_id) == 6:
+            part1 = file_id[:3]
+            part2 = file_id[3:]
+            download_url = f"https://edge.forgecdn.net/files/{part1}/{part2}/{urllib.parse.quote(file_name)}"
+            
+    if not download_url:
+        if log_callback: log_callback(f"[-] Не удалось получить ссылку для {mod_name}.")
         return False
 
     # Check dependencies first!
